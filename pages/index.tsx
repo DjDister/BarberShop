@@ -1,11 +1,23 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import { createClient } from "next-sanity";
+const inter = Inter({ subsets: ["latin"] });
 
-const inter = Inter({ subsets: ['latin'] })
+const client = createClient({
+  projectId: "0kjvrvfn",
+  dataset: "production",
+  apiVersion: "2022-03-25",
+  useCdn: false,
+});
 
-export default function Home() {
+export default function Home({
+  workinghours,
+}: {
+  workinghours: WorkingHour[];
+}) {
+  console.log(workinghours);
   return (
     <>
       <Head>
@@ -26,7 +38,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -119,5 +131,21 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
+}
+
+type WorkingHour = {
+  day: string;
+  hour: string;
+};
+
+export async function getStaticProps() {
+  const workinghours = await client.fetch<WorkingHour>(
+    `*[_type == "workinghour"]`
+  );
+  return {
+    props: {
+      workinghours,
+    },
+  };
 }
