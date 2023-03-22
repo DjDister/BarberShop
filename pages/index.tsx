@@ -15,10 +15,13 @@ const client = createClient({
 
 export default function Home({
   workinghours,
+  navbar,
 }: {
   workinghours: WorkingHour[];
+  navbar: NavbarElems[];
 }) {
   console.log(workinghours);
+  console.log(navbar);
   return (
     <div>
       <App />
@@ -30,14 +33,19 @@ type WorkingHour = {
   day: string;
   hour: string;
 };
+type NavbarElems = {
+  navabrelem: string;
+};
 
 export async function getStaticProps() {
+  const navbar = await client.fetch<NavbarElems>(`*[_type == "navbar"]`);
   const workinghours = await client.fetch<WorkingHour>(
     `*[_type == "workinghour"]`
   );
   return {
     props: {
       workinghours,
+      navbar,
     },
   };
 }
