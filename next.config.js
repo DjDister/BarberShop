@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-}
+};
+module.exports = {
+  ...nextConfig,
+  images: {
+    domains: ["cdn.discordapp.com"],
 
-module.exports = nextConfig
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/attachments/**",
+      },
+    ],
+  },
+};

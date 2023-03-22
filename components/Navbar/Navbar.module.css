@@ -1,0 +1,26 @@
+.bookameeting {
+  width: 80%;
+  height: 80%;
+  background-color: rgb(78, 143, 78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.bookameeting:hover {
+  background-color: white;
+  color: black;
+}
+.navbarelements {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 1.1rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.navbarelements:hover {
+  color: rgb(78, 143, 78);
+}
