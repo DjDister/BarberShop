@@ -1,8 +1,8 @@
 import styles from "@/styles/Home.module.css";
-
 import { createClient } from "next-sanity";
 import WorkingHours from "@/components/WorkingHours/WorkingHours";
 import Navbar from "@/components/Navbar/Navbar";
+import OurServices from "@/components/OurServices/OurServices";
 
 const client = createClient({
   projectId: "0kjvrvfn",
@@ -21,11 +21,17 @@ export default function Home({
   console.log(workinghours);
   console.log(navbar);
   return (
-    <div style={{ backgroundColor: "black", width: "100%", height: "100%" }}>
+    <div style={{ width: "100%", height: "100%" }}>
       <Navbar />
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />
       </div>
+      {/* <div style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
+          <OurServices ourservices={ourservices} />
+        </div>
+        <div style={{ width: "50%" }}></div>
+      </div> */}
     </div>
   );
 }
