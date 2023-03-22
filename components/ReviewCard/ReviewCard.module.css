@@ -1,0 +1,31 @@
+.cardCont{
+    display: flex;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 3px #ccc;
+    font-size: large;
+}
+
+.reviewImage{
+    border-radius: 50%;
+    display:none;
+}
+
+.reviewerName{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    color:#CCD5AE;
+}
+
+@media screen and (min-width: 768px){
+    .cardCont{
+        gap:20px;
+    }
+    .reviewImage{
+        display: block;
+    }
+}
+    

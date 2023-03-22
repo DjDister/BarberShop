@@ -14,3 +14,10 @@ export type OurService = {
   description: string;
   services: service[];
 };
+
+export type Review = {
+  name: string;
+  review: string;
+  rating: number;
+  image: any;
+};
