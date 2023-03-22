@@ -24,7 +24,16 @@ export default function WorkingHours({
           );
         })
         .map((wh, index) => (
-          <div key={index} className={styles.whElement}>
+          <div
+            key={index}
+            className={styles.whElement}
+            style={{
+              backgroundColor:
+                wh.hours.toLocaleLowerCase() === "closed"
+                  ? "#7a7978"
+                  : "#CCD5AE",
+            }}
+          >
             <h1>{wh.day}</h1>
             <div>{wh.hours}</div>
           </div>
