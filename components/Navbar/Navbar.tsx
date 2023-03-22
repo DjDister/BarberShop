@@ -5,6 +5,7 @@ import Image from "next/image";
 import { createClient } from "next-sanity";
 import MenuOpen from "../Icons/MenuOpen";
 import MenuClose from "../Icons/MenuClose";
+
 const navbarelements = ["Home", "Gallery", "Stylist", "Prices", "Contact"];
 
 export default function Navbar() {
@@ -12,14 +13,6 @@ export default function Navbar() {
   console.log(menuOpen);
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
-    const navMenu = document.querySelector(`.${styles.navMenu}`);
-    if (menuOpen) {
-      navMenu && navMenu.classList.add("closing");
-      navMenu && navMenu.classList.remove("opening");
-    } else {
-      navMenu && navMenu.classList.add("opening");
-      navMenu && navMenu.classList.remove("closing");
-    }
   };
 
   return (
@@ -29,32 +22,20 @@ export default function Navbar() {
           style={{
             width: "80%",
             height: "100%",
-            backgroundColor: "yellow",
+            backgroundColor: "black",
             display: "flex",
           }}
         >
-          <div
-            style={{
-              width: "20%",
-              backgroundColor: "red",
-              display: "flex",
-              justifyContent: "center",
-              gap: "5%",
-              alignItems: "center",
-              fontSize: "1.3rem",
-            }}
-          >
+          <div className={styles.titlewithlogo}>
             <Image
               src="https://cdn.discordapp.com/attachments/1087793261780926525/1087805241778507846/Aleksy_realistyc_logo_for_barber_92d34f75-b0ec-4622-9645-163d00ac8839.png"
               alt=""
               width={80}
               height={70}
             />
-            BEST BARBER
+            BARBER
           </div>
-          <div
-            style={{ width: "60%", backgroundColor: "blue", display: "flex" }}
-          >
+          <div style={{ width: "60%", display: "flex", color: "white" }}>
             {navbarelements.map((x, index) => {
               return (
                 <div
@@ -72,7 +53,7 @@ export default function Navbar() {
           <div
             style={{
               width: "20%",
-              backgroundColor: "orange",
+
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -82,21 +63,15 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <div
-        className={styles.mobileNav}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-        }}
-      >
+      <div className={styles.mobileNav}>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
-            backgroundColor: "yellow",
+            backgroundColor: "black",
+            color: "white",
             position: "relative",
           }}
         >
@@ -113,7 +88,8 @@ export default function Navbar() {
           >
             <div
               style={{
-                backgroundColor: "blue",
+                backgroundColor: "black",
+                color: "white",
                 display: "flex",
                 flexDirection: "column",
                 height: `${(navbarelements.length + 1) * 30}px`,
