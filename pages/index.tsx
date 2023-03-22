@@ -1,10 +1,8 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import App from "./App";
+
 import { createClient } from "next-sanity";
-const inter = Inter({ subsets: ["latin"] });
+import WorkingHours from "@/components/WorkingHours/WorkingHours";
+import Navbar from "@/components/Navbar/Navbar";
 
 const client = createClient({
   projectId: "0kjvrvfn",
@@ -23,15 +21,18 @@ export default function Home({
   console.log(workinghours);
   console.log(navbar);
   return (
-    <div>
-      <App />
+    <div style={{ backgroundColor: "black", width: "100%", height: "100%" }}>
+      <Navbar />
+      <div style={{ width: "100%", backgroundColor: "red" }}>
+        <WorkingHours className={styles.wkcont} workinghours={workinghours} />
+      </div>
     </div>
   );
 }
 
 type WorkingHour = {
   day: string;
-  hour: string;
+  hours: string;
 };
 type NavbarElems = {
   navabrelem: string;
