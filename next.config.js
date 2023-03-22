@@ -5,7 +5,7 @@ const nextConfig = {
 module.exports = {
   ...nextConfig,
   images: {
-    domains: ["cdn.discordapp.com"],
+    domains: ["cdn.discordapp.com", "cdn.sanity.io"],
 
     remotePatterns: [
       {
