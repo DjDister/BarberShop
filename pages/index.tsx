@@ -4,6 +4,7 @@ import WorkingHours from "@/components/WorkingHours/WorkingHours";
 import Navbar from "@/components/Navbar/Navbar";
 import OurServices from "@/components/OurServices/OurServices";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
+import Footer from "@/components/Footer/Footer";
 
 import { Elem } from "@/types";
 
@@ -37,6 +38,7 @@ export default function Home({
         </div>
         <div style={{ width: "50%" }}></div>
       </div> */}
+      <Footer />
     </div>
   );
 }
