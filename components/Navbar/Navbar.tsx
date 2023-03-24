@@ -5,16 +5,18 @@ import Image from "next/image";
 import { createClient } from "next-sanity";
 import MenuOpen from "../Icons/MenuOpen";
 import MenuClose from "../Icons/MenuClose";
+import Scissors from "../Icons/Scissors";
+import { Elem } from "@/types";
 
 const navbarelements = ["Home", "Gallery", "Stylist", "Prices", "Contact"];
 
-export default function Navbar() {
+export default function Navbar({ array }: { array: Elem[] }) {
   const [menuOpen, setMenuOpen] = useState(false);
   console.log(menuOpen);
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
-
+  console.log(array);
   return (
     <div className={styles.main} style={{ height: "70px" }}>
       <div className={styles.container}>
@@ -24,15 +26,11 @@ export default function Navbar() {
             height: "100%",
             backgroundColor: "black",
             display: "flex",
+            position: "relative",
           }}
         >
           <div className={styles.titlewithlogo}>
-            <Image
-              src="https://cdn.discordapp.com/attachments/1087793261780926525/1087805241778507846/Aleksy_realistyc_logo_for_barber_92d34f75-b0ec-4622-9645-163d00ac8839.png"
-              alt=""
-              width={80}
-              height={70}
-            />
+            <Scissors width="60px" height="60px" />
             BARBER
           </div>
           <div style={{ width: "60%", display: "flex", color: "white" }}>
@@ -45,7 +43,7 @@ export default function Navbar() {
                     width: `${100 / navbarelements.length + 1}%`,
                   }}
                 >
-                  {x.toLocaleUpperCase()}
+                  {x}
                 </div>
               );
             })}
@@ -75,7 +73,10 @@ export default function Navbar() {
             position: "relative",
           }}
         >
-          Navbar for mobile device
+          <div className={styles.titlewithlogo}>
+            <Scissors width="60px" height="60px" />
+            BARBER
+          </div>
           <div className={styles.menuOpener} onClick={handleMenuToggle}>
             <MenuOpen height="50px" width="50px" />
           </div>
@@ -93,7 +94,7 @@ export default function Navbar() {
                 display: "flex",
                 flexDirection: "column",
                 height: `${(navbarelements.length + 1) * 30}px`,
-                width: "100%",
+                width: "60%",
               }}
             >
               {navbarelements.map((x, index) => {

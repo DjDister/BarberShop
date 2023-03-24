@@ -2,7 +2,9 @@ export type WorkingHour = {
   day: string;
   hours: string;
 };
-
+export type Elem = {
+  navbarelem: string;
+};
 export type service = {
   title: string;
   cost: number;
