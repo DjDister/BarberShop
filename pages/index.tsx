@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import OurServices from "@/components/OurServices/OurServices";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
 import Footer from "@/components/Footer/Footer";
+import Contact from "@/components/Contact/Contact";
 
 import { Elem } from "@/types";
 
@@ -24,20 +25,23 @@ export default function Home({
 }) {
   console.log(workinghours);
   console.log(navbar);
+  let component;
+  if (typeof window !== "undefined") {
+    switch (window.location.pathname) {
+      case "/Contact":
+        component = <Contact />;
+        break;
+    }
+  }
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Navbar array={navbar} />
-      <SecondComponent />
+      <Contact />
+
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />
       </div>
 
-      {/* <div style={{ width: "100%" }}>
-        <div style={{ width: "100%" }}>
-          <OurServices ourservices={ourservices} />
-        </div>
-        <div style={{ width: "50%" }}></div>
-      </div> */}
       <Footer />
     </div>
   );
