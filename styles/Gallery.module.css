@@ -1,0 +1,13 @@
+
+  .carousel::-webkit-scrollbar {
+    height: 5px;
+  }
+  
+ .carousel::-webkit-scrollbar-thumb {
+    background: grey;
+    height: 1px;
+    border-radius: 100vw;
+  }
+  .container > *:not(:first-child) {
+    margin-left: 50px;
+  }

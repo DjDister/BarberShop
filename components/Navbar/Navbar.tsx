@@ -41,7 +41,17 @@ export default function Navbar({ array }: { array: Elem[] }) {
                     width: `${100 / navbarelements.length + 1}%`,
                   }}
                 >
-                  <a href={x === "Contact" ? "/Contact" : "/"}>{x}</a>
+                  <a
+                    href={
+                      x === "Contact"
+                        ? "/Contact"
+                        : x === "Gallery"
+                        ? "/gallery"
+                        : "/"
+                    }
+                  >
+                    {x}
+                  </a>
                 </div>
               );
             })}

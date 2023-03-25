@@ -35,3 +35,7 @@ export type Employee = {
   instalink?: string;
   twitterlink?: string;
 };
+
+export type GalleryPhotoType = {
+  image: any;
+};
