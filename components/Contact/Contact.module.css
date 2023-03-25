@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+.container {
+  width: 100%;
+  margin-top: 300px;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  font-family: "Roboto";
+  color: black;
+}
+.box {
+  width: 80%;
+}
+.part1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #faedcd;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.title {
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.line {
+  height: 2.5px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.description {
+  text-align: center;
+  font-weight: normal;
+}
+.part2 {
+  display: flex;
+  gap: 4%;
+  justify-content: center;
+}
+.getIn,
+.findUs,
+.extraInf {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+
+  padding-bottom: 10px;
+  text-align: center;
+}
+.inputdiv {
+  width: 100%;
+}
+.button {
+  outline: 1px solid transparent;
+  outline: none;
+}
+.insideExtra {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 3px solid #faedcd;
+  height: 38.5%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+.icons {
+  display: flex;
+  flex-direction: column;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+@media (max-width: 950px) {
+  .box {
+    width: 100%;
+  }
+
+  .part2 {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .getIn,
+  .findUs,
+  .extraInf {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

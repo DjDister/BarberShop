@@ -6,6 +6,11 @@ import OurServices from "@/components/OurServices/OurServices";
 import { Employee, OurService, Review, WorkingHour } from "@/types";
 import ReviewCard from "@/components/ReviewCard/ReviewCard";
 import EmployeeCard from "@/components/EmployeeCard/EmployeeCard";
+import SecondComponent from "@/components/SecondComponents/SecondComponent";
+import Footer from "@/components/Footer/Footer";
+import Contact from "@/components/Contact/Contact";
+
+import { Elem } from "@/types";
 
 const client = createClient({
   projectId: "0kjvrvfn",
@@ -19,15 +24,27 @@ export default function Home({
   ourservices,
   reviews,
   employees,
+  navbar,
 }: {
   workinghours: WorkingHour[];
   ourservices: OurService[];
   reviews: Review[];
   employees: Employee[];
+  navbar: Elem[];
 }) {
+  let component;
+  if (typeof window !== "undefined") {
+    switch (window.location.pathname) {
+      case "/Contact":
+        component = <Contact />;
+        break;
+    }
+  }
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <Navbar />
+      <Navbar array={navbar} />
+      <Contact />
+
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />
       </div>
@@ -56,23 +73,28 @@ export default function Home({
             <EmployeeCard key={index} employee={employee} />
           ))}
       </div>
+
+      <Footer />
     </div>
   );
 }
 
 export async function getStaticProps() {
-  const [workinghours, ourservices, reviews, employees] = await Promise.all([
-    client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
-    client.fetch<OurService>(`*[_type == "ourservices"]`),
-    client.fetch<Review[]>(`*[_type == "reviews"]`),
-    client.fetch<Employee[]>(`*[_type == "employees"]`),
-  ]);
+  const [workinghours, ourservices, reviews, employees, navbar] =
+    await Promise.all([
+      client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
+      client.fetch<OurService>(`*[_type == "ourservices"]`),
+      client.fetch<Review[]>(`*[_type == "reviews"]`),
+      client.fetch<Employee[]>(`*[_type == "employees"]`),
+      client.fetch<Elem>(`*[_type == "navbar"]`),
+    ]);
   return {
     props: {
       workinghours,
       ourservices,
       reviews,
       employees,
+      navbar,
     },
   };
 }
