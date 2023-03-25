@@ -3,6 +3,9 @@ import { createClient } from "next-sanity";
 import WorkingHours from "@/components/WorkingHours/WorkingHours";
 import Navbar from "@/components/Navbar/Navbar";
 import OurServices from "@/components/OurServices/OurServices";
+import { Employee, OurService, Review, WorkingHour } from "@/types";
+import ReviewCard from "@/components/ReviewCard/ReviewCard";
+import EmployeeCard from "@/components/EmployeeCard/EmployeeCard";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
 import Footer from "@/components/Footer/Footer";
 import Contact from "@/components/Contact/Contact";
@@ -18,13 +21,17 @@ const client = createClient({
 
 export default function Home({
   workinghours,
+  ourservices,
+  reviews,
+  employees,
   navbar,
 }: {
   workinghours: WorkingHour[];
+  ourservices: OurService[];
+  reviews: Review[];
+  employees: Employee[];
   navbar: Elem[];
 }) {
-  console.log(workinghours);
-  console.log(navbar);
   let component;
   if (typeof window !== "undefined") {
     switch (window.location.pathname) {
@@ -40,6 +47,31 @@ export default function Home({
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />
       </div>
+      <div style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
+          <OurServices ourservices={ourservices} />
+        </div>
+        <div style={{ width: "50%" }}></div>
+      </div>
+      <div style={{ width: "100%" }}>
+        {reviews &&
+          reviews
+            .slice(0, 4)
+            .map((review, index) => <ReviewCard key={index} review={review} />)}
+      </div>
+      <div
+        style={{
+          gap: "10px",
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {employees &&
+          employees.map((employee, index) => (
+            <EmployeeCard key={index} employee={employee} />
+          ))}
+      </div>
 
       {/* <div style={{ width: "100%" }}>
         <div style={{ width: "100%" }}>
@@ -52,22 +84,21 @@ export default function Home({
   );
 }
 
-type WorkingHour = {
-  day: string;
-  hours: string;
-};
-type NavbarElems = {
-  navabrelem: string;
-};
-
 export async function getStaticProps() {
-  const navbar = await client.fetch<NavbarElems>(`*[_type == "navbar"]`);
-  const workinghours = await client.fetch<WorkingHour>(
-    `*[_type == "workinghour"]`
-  );
+  const [workinghours, ourservices, reviews, employees, navbar] =
+    await Promise.all([
+      client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
+      client.fetch<OurService>(`*[_type == "ourservices"]`),
+      client.fetch<Review[]>(`*[_type == "reviews"]`),
+      client.fetch<Employee[]>(`*[_type == "employees"]`),
+      client.fetch<Elem>(`*[_type == "navbar"]`),
+    ]);
   return {
     props: {
       workinghours,
+      ourservices,
+      reviews,
+      employees,
       navbar,
     },
   };
