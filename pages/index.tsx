@@ -36,12 +36,17 @@ export default function Home({
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Navbar array={navbar} />
-      <Contact />
-
+      <SecondComponent />
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />
       </div>
 
+      {/* <div style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
+          <OurServices ourservices={ourservices} />
+        </div>
+        <div style={{ width: "50%" }}></div>
+      </div> */}
       <Footer />
     </div>
   );
