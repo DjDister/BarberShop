@@ -75,6 +75,12 @@ export default function Home({
           ))}
       </div>
 
+      {/* <div style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
+          <OurServices ourservices={ourservices} />
+        </div>
+        <div style={{ width: "50%" }}></div>
+      </div> */}
       <Footer />
     </div>
   );
