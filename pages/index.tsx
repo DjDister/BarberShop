@@ -53,11 +53,42 @@ export default function Home({
         </div>
         <div style={{ width: "50%" }}></div>
       </div>
-      <div style={{ width: "100%" }}>
+      <div className={styles.reviewdiv} style={{ width: "100%" }}>
         {reviews &&
-          reviews
-            .slice(0, 4)
-            .map((review, index) => <ReviewCard key={index} review={review} />)}
+          reviews.slice(0, 4).map((review, index) => (
+            <div key={index} className={styles.rewiev}>
+              <ReviewCard review={review} />
+            </div>
+          ))}
+      </div>
+      <div>
+        <div style={{ textAlign: "center", color: "gray", fontSize: "1.8rem" }}>
+          MEET OUR TEAM OF BEARD PROFESSIONALS
+        </div>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "2.3rem",
+            fontWeight: "bold",
+            marginBottom: "10px",
+          }}
+        >
+          OUR BARBERS AND STYLISTS
+        </div>
+        <div
+          className={styles.line}
+          style={{
+            width: "100%",
+            height: "3px",
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+          <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
+          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+        </div>
       </div>
       <div
         style={{
