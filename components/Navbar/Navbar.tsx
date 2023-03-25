@@ -12,11 +12,9 @@ const navbarelements = ["Home", "Gallery", "Stylist", "Prices", "Contact"];
 
 export default function Navbar({ array }: { array: Elem[] }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(menuOpen);
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
-  console.log(array);
   return (
     <div className={styles.main} style={{ height: "70px" }}>
       <div className={styles.container}>
