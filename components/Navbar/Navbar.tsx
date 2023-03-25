@@ -7,7 +7,6 @@ import MenuOpen from "../Icons/MenuOpen";
 import MenuClose from "../Icons/MenuClose";
 import Scissors from "../Icons/Scissors";
 import { Elem } from "@/types";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const navbarelements = ["Home", "Gallery", "Stylist", "Prices", "Contact"];
 
@@ -42,7 +41,17 @@ export default function Navbar({ array }: { array: Elem[] }) {
                     width: `${100 / navbarelements.length + 1}%`,
                   }}
                 >
-                  <a href={"/" + x}>{x}</a>
+                  <a
+                    href={
+                      x === "Contact"
+                        ? "/Contact"
+                        : x === "Gallery"
+                        ? "/gallery"
+                        : "/"
+                    }
+                  >
+                    {x}
+                  </a>
                 </div>
               );
             })}

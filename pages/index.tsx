@@ -44,6 +44,8 @@ export default function Home({
     <div style={{ width: "100%", height: "100%" }}>
       <Navbar array={navbar} />
       <SecondComponent />
+      <Contact />
+
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />
       </div>
