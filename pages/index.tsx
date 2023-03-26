@@ -8,7 +8,7 @@ import ReviewCard from "@/components/ReviewCard/ReviewCard";
 import EmployeeCard from "@/components/EmployeeCard/EmployeeCard";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
 import Footer from "@/components/Footer/Footer";
-import Contact from "@/components/Contact/Contact";
+import Contact from "@/pages/Contact";
 
 import { Elem } from "@/types";
 
@@ -34,19 +34,10 @@ export default function Home({
   navbar: Elem[];
   landingphotos: any[];
 }) {
-  let component;
-  if (typeof window !== "undefined") {
-    switch (window.location.pathname) {
-      case "/Contact":
-        component = <Contact />;
-        break;
-    }
-  }
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Navbar array={navbar} />
       <SecondComponent photos={landingphotos} />
-      <Contact />
 
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />

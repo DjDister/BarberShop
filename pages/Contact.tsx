@@ -1,13 +1,30 @@
 import React from "react";
-import styles from "./Contact.module.css";
-import Phone2 from "../Icons/Phone2";
-import Email2 from "../Icons/Email2";
-import Home from "../Icons/Home";
-import World from "../Icons/World";
-import Phone3 from "../Icons/Phone3";
-export default function Contact() {
+import { createClient } from "next-sanity";
+import styles from "../components/Contact/Contact.module.css";
+import Phone2 from "../components/Icons/Phone2";
+import Email2 from "../components/Icons/Email2";
+import Home from "../components/Icons/Home";
+import World from "../components/Icons/World";
+import Phone3 from "../components/Icons/Phone3";
+import Navbar from "@/components/Navbar/Navbar";
+import { GalleryPhotoType, Elem } from "@/types";
+const client = createClient({
+  projectId: "0kjvrvfn",
+  dataset: "production",
+  apiVersion: "2022-03-25",
+  useCdn: false,
+});
+
+export default function Contact({
+  galleryphotos,
+  navbar,
+}: {
+  galleryphotos: GalleryPhotoType[];
+  navbar: Elem[];
+}) {
   return (
     <div className={styles.container}>
+      <Navbar array={navbar} />
       <div className={styles.box}>
         <div className={styles.part1}>
           {" "}
@@ -167,4 +184,16 @@ export default function Contact() {
       </div>
     </div>
   );
+}
+export async function getStaticProps() {
+  const [galleryphotos, navbar] = await Promise.all([
+    client.fetch<GalleryPhotoType[]>(`*[_type == "galleryphoto"]`),
+    client.fetch<Elem>(`*[_type == "navbar"]`),
+  ]);
+  return {
+    props: {
+      galleryphotos,
+      navbar,
+    },
+  };
 }
