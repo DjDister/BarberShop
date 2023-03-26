@@ -16,7 +16,17 @@ export default function OurServices({
   );
   return (
     <div className={styles.ourservicesContainer}>
-      <h1 className={styles.label}>OUR SERVICES</h1>
+      <h1
+        className={styles.label}
+        style={{
+          textAlign: "center",
+          fontSize: "2.3rem",
+          fontWeight: "bold",
+          marginBottom: "10px",
+        }}
+      >
+        OUR SERVICES
+      </h1>
       <div className={styles.servicesCont}>
         {ourservices.map((ourservice, index) => (
           <div key={index}>

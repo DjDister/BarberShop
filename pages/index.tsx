@@ -55,6 +55,32 @@ export default function Home({
         </div>
         <div style={{ width: "50%" }}></div>
       </div>
+      <div>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "2.3rem",
+            fontWeight: "bold",
+            marginBottom: "10px",
+          }}
+        >
+          OUR REVIEWS
+        </div>
+        <div
+          className={styles.line}
+          style={{
+            width: "100%",
+            height: "3px",
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+          <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
+          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+        </div>
+      </div>
       <div className={styles.reviewdiv} style={{ width: "100%" }}>
         {reviews &&
           reviews.slice(0, 4).map((review, index) => (
