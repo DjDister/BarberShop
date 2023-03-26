@@ -39,10 +39,10 @@
 .navbarelements {
   height: 100%;
   display: flex;
-  justify-content: center;
+  padding-left: 10%;
   align-items: center;
-  font-weight: 400;
-  font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .navbarelements:hover {
@@ -55,7 +55,8 @@
 .navMenu {
   display: none;
 }
-@media screen and (max-width: 1000px) {
+
+@media screen and (max-width: 1130px) {
   .mobileNav {
     position: relative;
     width: 100%;
@@ -64,8 +65,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
-    opacity: 0.9;
+
     position: relative;
     z-index: 90000;
   }
@@ -75,7 +75,7 @@
   .navMenu {
     position: absolute;
     right: 100%;
-
+    top: 70px;
     width: 100%;
     height: 40px;
 

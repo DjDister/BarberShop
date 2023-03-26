@@ -31,7 +31,7 @@ export default function Navbar({ array }: { array: Elem[] }) {
             <Scissors width="60px" height="60px" />
             BARBER
           </div>
-          <div style={{ width: "60%", display: "flex", color: "white" }}>
+          <div style={{ width: "50%", display: "flex", color: "white" }}>
             {navbarelements.map((x, index) => {
               return (
                 <div
@@ -76,50 +76,89 @@ export default function Navbar({ array }: { array: Elem[] }) {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
+            height: "100%",
             backgroundColor: "black",
             color: "white",
             position: "relative",
+            opacity: "0.9",
           }}
         >
           <div className={styles.titlewithlogo}>
             <Scissors width="60px" height="60px" />
             BARBER
           </div>
+
           <div className={styles.menuOpener} onClick={handleMenuToggle}>
             <MenuOpen height="50px" width="50px" />
           </div>
+        </div>
+        <div
+          className={styles.navMenu}
+          style={{
+            display: "flex",
+            position: "absolute",
+            opacity: "1",
+          }}
+        >
           <div
-            className={styles.navMenu}
             style={{
+              backgroundColor: "white",
+              color: "black",
               display: "flex",
-              position: "absolute",
+              flexDirection: "column",
+              height: `${navbarelements.length * 35 + 55}px`,
+              width: "60%",
+              borderRadius: "10px",
+              opacity: "1",
             }}
           >
+            {navbarelements.map((x, index) => {
+              return (
+                <div
+                  key={index}
+                  className={styles.navbarelements}
+                  style={{ height: "35px", opacity: "1" }}
+                >
+                  <a
+                    href={
+                      x === "Contact"
+                        ? "/Contact"
+                        : x === "Gallery"
+                        ? "/gallery"
+                        : "/"
+                    }
+                  >
+                    {x.toLocaleUpperCase()}
+                  </a>
+                </div>
+              );
+            })}
             <div
               style={{
-                backgroundColor: "black",
-                color: "white",
                 display: "flex",
-                flexDirection: "column",
-                height: `${(navbarelements.length + 1) * 30}px`,
-                width: "60%",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "50px",
               }}
             >
-              {navbarelements.map((x, index) => {
-                return (
-                  <div key={index} className={styles.navbarelements}>
-                    {x.toLocaleUpperCase()}
-                  </div>
-                );
-              })}
+              <div
+                className={styles.bookameeting}
+                style={{
+                  height: "40px",
+                  fontWeight: "600",
+                  fontSize: "1.2rem",
+                }}
+              >
+                BOOK A MEETING
+              </div>
             </div>
-            {/* <div
+          </div>
+          {/* <div
               className={styles.menuCloser}
               onClick={() => setMenuOpen(false)}
             >
               {<MenuClose />}
             </div> */}
-          </div>
         </div>
       </div>
     </div>
