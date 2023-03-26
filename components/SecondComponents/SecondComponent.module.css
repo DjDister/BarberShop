@@ -18,7 +18,7 @@
   }
 }
 .container {
-  width: calc(100% + 1px);
+  width: 100%;
   height: 100vh;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -26,14 +26,17 @@
   background-color: black;
   color: #faedcd;
   position: relative;
+/* overflow: hidden; */
 }
-/* .box {
-  position: relative;
-  width: 98%;
-  height: 98%;
+.box {
+  position: absolute;
+  width: calc(100% + 400px);
+  height: calc(100% + 400px);
+  /* left: -400px;
+  top: -400px; */
 }
 
-.box:hover {
+/* .box:hover {
   animation-name: move;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
@@ -48,60 +51,63 @@
   font-weight: bold;
   z-index: 1000;
 }
-.zdjecie1,
-.zdjecie2,
-.zdjecie3,
-.zdjecie4,
-.zdjecie5,
-.zdjecie6,
-.zdjecie7,
-.zdjecie8 {
+
+.photo1,
+.photo2,
+.photo3,
+.photo4,
+.photo5,
+.photo6,
+.photo7,
+.photo8 {
   position: absolute;
   opacity: 0;
-  animation: pop-in 1.2s ease-out forwards;
+  animation: pop-in 1.4s ease-out forwards;
 }
 
-.zdjecie1 {
+.photo1 {
   top: 60%;
   left: 70%;
 }
-.zdjecie2 {
+.phoot2 {
   top: 15%;
   left: 10%;
 }
-.zdjecie3 {
+.photo3 {
   top: 10%;
   left: 60%;
 }
-.zdjecie4 {
+.photo4 {
   top: 58%;
   left: 30%;
 }
-.zdjecie5 {
+.photo5 {
   top: 73%;
   left: 10%;
 }
-.zdjecie6 {
+.photo6 {
   top: 30%;
   left: 80%;
 }
-.zdjecie7 {
+.photo7 {
   top: 20%;
   left: 35%;
 }
-.zdjecie8 {
+.photo8 {
   top: 75%;
   left: 50%;
 }
+
+
 @media (max-width: 800px) {
-  .zdjecie6,
-  .zdjecie1 {
+  .photo6,
+  .photo1 {
     display: none;
   }
 }
 @media (max-width: 600px) {
-  .zdjecie8,
-  .zdjecie3 {
+  .photo8,
+  .photo3 {
     display: none;
   }
 }

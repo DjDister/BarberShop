@@ -25,12 +25,14 @@ export default function Home({
   reviews,
   employees,
   navbar,
+  landingphotos,
 }: {
   workinghours: WorkingHour[];
   ourservices: OurService[];
   reviews: Review[];
   employees: Employee[];
   navbar: Elem[];
+  landingphotos: any[];
 }) {
   let component;
   if (typeof window !== "undefined") {
@@ -43,7 +45,7 @@ export default function Home({
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Navbar array={navbar} />
-      <SecondComponent />
+      <SecondComponent photos={landingphotos} />
       <Contact />
 
       <div style={{ width: "100%", backgroundColor: "red" }}>
@@ -144,13 +146,14 @@ export default function Home({
 }
 
 export async function getStaticProps() {
-  const [workinghours, ourservices, reviews, employees, navbar] =
+  const [workinghours, ourservices, reviews, employees, navbar, landingphotos] =
     await Promise.all([
       client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
       client.fetch<OurService>(`*[_type == "ourservices"]`),
       client.fetch<Review[]>(`*[_type == "reviews"]`),
       client.fetch<Employee[]>(`*[_type == "employees"]`),
       client.fetch<Elem>(`*[_type == "navbar"]`),
+      client.fetch<Elem>(`*[_type == "landingphoto"]`),
     ]);
   return {
     props: {
@@ -159,6 +162,7 @@ export async function getStaticProps() {
       reviews,
       employees,
       navbar,
+      landingphotos,
     },
   };
 }

@@ -1,78 +1,43 @@
-import React from "react";
-import { useState, useRef, useEffect } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./SecondComponent.module.css";
-import Foto1 from "../images/foto1.jpg";
-import Foto2 from "../images/foto2.jpg";
-import Foto3 from "../images/foto3.jpg";
-import Foto4 from "../images/foto4.jpg";
-import Foto5 from "../images/foto5.jpg";
-import Foto6 from "../images/foto6.jpg";
-import Foto7 from "../images/foto7.jpg";
-import Foto8 from "../images/foto8.jpg";
-import Image from "next/image";
+import Photo from "./Photo";
 
-export default function SecondComponent() {
+const MemoizedPhoto = React.memo(Photo);
+
+export default function SecondComponent({ photos }: { photos: any[] }) {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [left, setLeft] = useState<number>(-180);
+  const [top, setTop] = useState<number>(-200);
+
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    if (boxRef.current && window.screen.width > 768) {
+      const { left: boxLeft, top: boxTop } =
+        boxRef.current.getBoundingClientRect();
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+      const newLeft = mouseX - boxLeft - boxRef.current.offsetWidth / 2;
+      const newTop = mouseY - boxTop - boxRef.current.offsetHeight / 2;
+
+      setLeft(-200 + newLeft / 10);
+      setTop(-200 + newTop / 10);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [handleMouseMove]);
+
   return (
     <div className={styles.container}>
-      <div className={styles.box}>
+      <div className={styles.box} ref={boxRef} style={{ left, top }}>
         <div className={styles.title}>WELCOME TO BARBERSHOP</div>
         <div className={styles.images}>
-          <Image
-            src={Foto1}
-            alt="My Image"
-            width={200}
-            height={150}
-            className={styles.zdjecie1}
-          />
-          <Image
-            src={Foto2}
-            alt="My Image"
-            width={200}
-            height={150}
-            className={styles.zdjecie2}
-          />
-          <Image
-            src={Foto3}
-            alt="My Image"
-            width={200}
-            height={150}
-            className={styles.zdjecie3}
-          />
-          <Image
-            src={Foto4}
-            alt="My Image"
-            width={200}
-            height={150}
-            className={styles.zdjecie4}
-          />
-          <Image
-            src={Foto5}
-            alt="My Image"
-            width={200}
-            height={150}
-            className={styles.zdjecie5}
-          />
-          <Image
-            src={Foto6}
-            alt="My Image"
-            width={200}
-            height={200}
-            className={styles.zdjecie6}
-          />
-          <Image
-            src={Foto7}
-            alt="My Image"
-            width={250}
-            height={150}
-            className={styles.zdjecie7}
-          />
-          <Image
-            src={Foto8}
-            alt="My Image"
-            width={200}
-            height={150}
-            className={styles.zdjecie8}
-          />
+          {photos.map((photo, index) => (
+            <MemoizedPhoto key={index} photo={photo} index={index} />
+          ))}
         </div>
       </div>
     </div>
