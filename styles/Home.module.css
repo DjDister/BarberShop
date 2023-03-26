@@ -1,3 +1,11 @@
-.wkcont{
-  gap:10px
+.wkcont {
+  gap: 10px;
+}
+.reviewdiv {
+  display: flex;
+  flex-wrap: wrap;
+}
+.rewiev {
+  width: 48%;
+  margin-left: 1%;
 }
