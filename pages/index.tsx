@@ -131,7 +131,7 @@ export default function Home({
         </div>
         <div style={{ width: "50%" }}></div>
       </div> */}
-      <Footer />
+      <Footer workinghours={workinghours} />
     </div>
   );
 }
