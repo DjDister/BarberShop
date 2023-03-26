@@ -3,12 +3,18 @@ import { createClient } from "next-sanity";
 import WorkingHours from "@/components/WorkingHours/WorkingHours";
 import Navbar from "@/components/Navbar/Navbar";
 import OurServices from "@/components/OurServices/OurServices";
-import { Employee, FooterType, OurService, Review, WorkingHour } from "@/types";
+import {
+  Employee,
+  FooterType,
+  LandingData,
+  OurService,
+  Review,
+  WorkingHour,
+} from "@/types";
 import ReviewCard from "@/components/ReviewCard/ReviewCard";
 import EmployeeCard from "@/components/EmployeeCard/EmployeeCard";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
 import Footer from "@/components/Footer/Footer";
-import Contact from "@/pages/Contact";
 
 import { Elem } from "@/types";
 
@@ -27,6 +33,7 @@ export default function Home({
   navbar,
   landingphotos,
   footer,
+  landingdata,
 }: {
   workinghours: WorkingHour[];
   ourservices: OurService[];
@@ -35,11 +42,12 @@ export default function Home({
   navbar: Elem[];
   landingphotos: any[];
   footer: FooterType[];
+  landingdata: LandingData[];
 }) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Navbar array={navbar} />
-      <SecondComponent photos={landingphotos} />
+      <SecondComponent photos={landingphotos} title={landingdata[0].title} />
 
       <div style={{ width: "100%", backgroundColor: "red" }}>
         <WorkingHours className={styles.wkcont} workinghours={workinghours} />
@@ -59,7 +67,7 @@ export default function Home({
             marginBottom: "10px",
           }}
         >
-          OUR REVIEWS
+          {landingdata[0].reviewsTitle}
         </div>
         <div
           className={styles.line}
@@ -86,7 +94,7 @@ export default function Home({
       </div>
       <div>
         <div style={{ textAlign: "center", color: "gray", fontSize: "1.8rem" }}>
-          MEET OUR TEAM OF BEARD PROFESSIONALS
+          {landingdata[0].ourTeamTitle}
         </div>
         <div
           style={{
@@ -96,7 +104,7 @@ export default function Home({
             marginBottom: "10px",
           }}
         >
-          OUR BARBERS AND STYLISTS
+          {landingdata[0].ourTeamTitle2}
         </div>
         <div
           className={styles.line}
@@ -147,6 +155,7 @@ export async function getStaticProps() {
     navbar,
     landingphotos,
     footer,
+    landingdata,
   ] = await Promise.all([
     client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
     client.fetch<OurService>(`*[_type == "ourservices"]`),
@@ -155,6 +164,7 @@ export async function getStaticProps() {
     client.fetch<Elem>(`*[_type == "navbar"]`),
     client.fetch<Elem>(`*[_type == "landingphoto"]`),
     client.fetch<FooterType>(`*[_type == "footer"]`),
+    client.fetch<LandingData>(`*[_type == "landingdata"]`),
   ]);
   return {
     props: {
@@ -165,6 +175,7 @@ export async function getStaticProps() {
       navbar,
       landingphotos,
       footer,
+      landingdata,
     },
   };
 }

@@ -4,7 +4,13 @@ import Photo from "./Photo";
 
 const MemoizedPhoto = React.memo(Photo);
 
-export default function SecondComponent({ photos }: { photos: any[] }) {
+export default function SecondComponent({
+  photos,
+  title,
+}: {
+  photos: any[];
+  title: string;
+}) {
   const boxRef = useRef<HTMLDivElement>(null);
   const [left, setLeft] = useState<number>(-180);
   const [top, setTop] = useState<number>(-200);
@@ -33,7 +39,7 @@ export default function SecondComponent({ photos }: { photos: any[] }) {
   return (
     <div className={styles.container}>
       <div className={styles.box} ref={boxRef} style={{ left, top }}>
-        <div className={styles.title}>WELCOME TO BARBERSHOP</div>
+        <div className={styles.title}>{title}</div>
         <div className={styles.images}>
           {photos.map((photo, index) => (
             <MemoizedPhoto key={index} photo={photo} index={index} />

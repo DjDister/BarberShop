@@ -48,3 +48,10 @@ export type FooterType = {
   email: string;
   address: string;
 };
+
+export type LandingData = {
+  title: string;
+  reviewsTitle: string;
+  ourTeamTitle: string;
+  ourTeamTitle2: string;
+};
