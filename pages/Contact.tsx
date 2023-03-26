@@ -7,7 +7,7 @@ import Home from "../components/Icons/Home";
 import World from "../components/Icons/World";
 import Phone3 from "../components/Icons/Phone3";
 import Navbar from "@/components/Navbar/Navbar";
-import { GalleryPhotoType, Elem } from "@/types";
+import { GalleryPhotoType, Elem, ConctactData } from "@/types";
 const client = createClient({
   projectId: "0kjvrvfn",
   dataset: "production",
@@ -16,34 +16,30 @@ const client = createClient({
 });
 
 export default function Contact({
-  galleryphotos,
   navbar,
+  contact,
 }: {
-  galleryphotos: GalleryPhotoType[];
   navbar: Elem[];
+  contact: ConctactData[];
 }) {
+  const contactData = contact;
   return (
     <div className={styles.container}>
       <Navbar array={navbar} />
       <div className={styles.box}>
         <div className={styles.part1}>
           {" "}
-          <div className={styles.title}>CONTACT US</div>
+          <div className={styles.title}>{contactData[0].title}</div>
           <div className={styles.line}>
             <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
             <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
             <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
           </div>
-          <div className={styles.description}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima,
-            quas quasi repellendus vel atque tempore iure perferendis! Soluta
-            itaque consectetur, ex eos blanditiis a autem, unde nesciunt, error
-            facere maiores?
-          </div>
+          <div className={styles.description}>{contactData[0].description}</div>
         </div>
         <div className={styles.part2}>
           <div className={styles.getIn}>
-            <div className={styles.title2}>GET IN TOUCH</div>
+            <div className={styles.title2}>{contactData[0].formTitle}</div>
             <div className={styles.line}>
               <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
               <div style={{ width: "80%", backgroundColor: "#faedcd" }}></div>
@@ -120,7 +116,7 @@ export default function Contact({
             </div>
           </div>
           <div className={styles.findUs}>
-            <div className={styles.title2}>FIND US QUICKLY</div>
+            <div className={styles.title2}>{contactData[0].mapTitle}</div>
             <div className={styles.line}>
               <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
               <div style={{ width: "80%", backgroundColor: "#faedcd" }}></div>
@@ -135,7 +131,9 @@ export default function Contact({
             </div>
           </div>
           <div className={styles.extraInf}>
-            <div className={styles.title2}> INFORMATION</div>
+            <div className={styles.title2}>
+              {contactData[0].informationTitle}
+            </div>
             <div className={styles.line}>
               <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
               <div style={{ width: "80%", backgroundColor: "#faedcd" }}></div>
@@ -148,35 +146,32 @@ export default function Contact({
                 alignItems: "center",
               }}
             >
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Exercitationem cupiditate ducimus voluptate eos aliquam impedit,
-              laborum eaque quas eum quo vitae ipsa esse. Nihil laudantium
-              provident aut a! Laborum, vel.
+              {contactData[0].informationDescription}
             </div>
             <div className={styles.insideExtra}>
               <div className={styles.icons}>
                 <div className={styles.icon}>
                   <Phone2 fill="#396e3d" />
-                  +48 123 456 789
+                  {contactData[0].phone}
                 </div>
                 <div className={styles.icon}>
-                  <Phone3 fill="#396e3d" /> +49 9876 6543 321
+                  <Phone3 fill="#396e3d" /> {contactData[0].phone2}
                 </div>
                 <div className={styles.icon}>
                   {" "}
                   <Home fill="#396e3d" />
-                  ul Akademicka 5 Warszawa
+                  {contactData[0].address}
                 </div>
                 <div className={styles.icon}>
                   {" "}
                   <Email2 fill="#396e3d" />
-                  barbarshop@gmail.com
+                  {contactData[0].email}
                 </div>
-                <div className={styles.icon}>
+                {/* <div className={styles.icon}>
                   {" "}
                   <World fill="#396e3d" />
                   www.bestbarber.com
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -186,14 +181,14 @@ export default function Contact({
   );
 }
 export async function getStaticProps() {
-  const [galleryphotos, navbar] = await Promise.all([
-    client.fetch<GalleryPhotoType[]>(`*[_type == "galleryphoto"]`),
+  const [navbar, contact] = await Promise.all([
     client.fetch<Elem>(`*[_type == "navbar"]`),
+    client.fetch<ConctactData>(`*[_type == "contact"]`),
   ]);
   return {
     props: {
-      galleryphotos,
       navbar,
+      contact,
     },
   };
 }

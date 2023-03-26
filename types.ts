@@ -55,3 +55,16 @@ export type LandingData = {
   ourTeamTitle: string;
   ourTeamTitle2: string;
 };
+
+export type ConctactData = {
+  title: string;
+  formTitle: string;
+  mapTitle: string;
+  informationTitle: string;
+  informationDescription: string;
+  description: string;
+  address: string;
+  phone: string;
+  phone2: string;
+  email: string;
+};

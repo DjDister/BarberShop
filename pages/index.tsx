@@ -4,6 +4,7 @@ import WorkingHours from "@/components/WorkingHours/WorkingHours";
 import Navbar from "@/components/Navbar/Navbar";
 import OurServices from "@/components/OurServices/OurServices";
 import {
+  ConctactData,
   Employee,
   FooterType,
   LandingData,
