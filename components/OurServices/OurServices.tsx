@@ -14,6 +14,7 @@ export default function OurServices({
   const [hoveredService, setHoveredService] = React.useState<OurService | null>(
     null
   );
+
   return (
     <div className={styles.ourservicesContainer}>
       <h1 className={styles.label}>OUR SERVICES</h1>
@@ -30,11 +31,11 @@ export default function OurServices({
                     : "grey",
               }}
               className={styles.serviceBtn}
-              onClick={() =>
+              onClick={() => {
                 setSelectedService((prev) =>
                   ourservice === prev ? null : ourservice
-                )
-              }
+                );
+              }}
               onMouseEnter={() => setHoveredService(ourservice)}
               onMouseLeave={() => setHoveredService(null)}
             >
@@ -64,7 +65,10 @@ export default function OurServices({
               </div>
             </button>
             {selectedService === ourservice && (
-              <div className={styles.serviceContent}>
+              <div
+                className={styles.serviceContent}
+                style={{ height: selectedService === ourservice ? "auto" : 0 }}
+              >
                 <div className={styles.serviceDescription}>
                   {ourservice.description}
                 </div>

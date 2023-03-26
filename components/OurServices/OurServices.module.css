@@ -29,9 +29,20 @@ margin-bottom: 25px;
     color:grey;
 }
 
-.serviceContent{
-    animation: fadeInDown 1s ;
-}
+.serviceContent {
+    height: 0;
+    overflow: hidden;
+    animation: unfold 1.0s ease-in-out;
+  }
+  
+  @keyframes unfold {
+    from {
+      max-height: 0px;
+    }
+    to {
+      max-height: 800px;
+    }
+  }
 
 .serviceBtn{
     all: unset;
@@ -104,13 +115,4 @@ margin-bottom: 25px;
     }
 }
 
-@keyframes fadeInDown {
-    0% {
-        max-height: 0px;
-        
-    }
-    100% {
-        max-height: 800px;
-    }
-}
-    
+
