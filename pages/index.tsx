@@ -3,7 +3,7 @@ import { createClient } from "next-sanity";
 import WorkingHours from "@/components/WorkingHours/WorkingHours";
 import Navbar from "@/components/Navbar/Navbar";
 import OurServices from "@/components/OurServices/OurServices";
-import { Employee, OurService, Review, WorkingHour } from "@/types";
+import { Employee, FooterType, OurService, Review, WorkingHour } from "@/types";
 import ReviewCard from "@/components/ReviewCard/ReviewCard";
 import EmployeeCard from "@/components/EmployeeCard/EmployeeCard";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
@@ -26,6 +26,7 @@ export default function Home({
   employees,
   navbar,
   landingphotos,
+  footer,
 }: {
   workinghours: WorkingHour[];
   ourservices: OurService[];
@@ -33,6 +34,7 @@ export default function Home({
   employees: Employee[];
   navbar: Elem[];
   landingphotos: any[];
+  footer: FooterType[];
 }) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -131,21 +133,29 @@ export default function Home({
         </div>
         <div style={{ width: "50%" }}></div>
       </div> */}
-      <Footer workinghours={workinghours} />
+      <Footer workinghours={workinghours} footer={footer[0]} />
     </div>
   );
 }
 
 export async function getStaticProps() {
-  const [workinghours, ourservices, reviews, employees, navbar, landingphotos] =
-    await Promise.all([
-      client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
-      client.fetch<OurService>(`*[_type == "ourservices"]`),
-      client.fetch<Review[]>(`*[_type == "reviews"]`),
-      client.fetch<Employee[]>(`*[_type == "employees"]`),
-      client.fetch<Elem>(`*[_type == "navbar"]`),
-      client.fetch<Elem>(`*[_type == "landingphoto"]`),
-    ]);
+  const [
+    workinghours,
+    ourservices,
+    reviews,
+    employees,
+    navbar,
+    landingphotos,
+    footer,
+  ] = await Promise.all([
+    client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
+    client.fetch<OurService>(`*[_type == "ourservices"]`),
+    client.fetch<Review[]>(`*[_type == "reviews"]`),
+    client.fetch<Employee[]>(`*[_type == "employees"]`),
+    client.fetch<Elem>(`*[_type == "navbar"]`),
+    client.fetch<Elem>(`*[_type == "landingphoto"]`),
+    client.fetch<FooterType>(`*[_type == "footer"]`),
+  ]);
   return {
     props: {
       workinghours,
@@ -154,6 +164,7 @@ export async function getStaticProps() {
       employees,
       navbar,
       landingphotos,
+      footer,
     },
   };
 }
