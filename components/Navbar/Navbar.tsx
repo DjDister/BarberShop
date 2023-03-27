@@ -7,7 +7,8 @@ import MenuOpen from "../Icons/MenuOpen";
 import MenuClose from "../Icons/MenuClose";
 import Scissors from "../Icons/Scissors";
 import { Elem } from "@/types";
-import { Link, Element } from "react-scroll";
+import { Link as ScrollLink, Element } from "react-scroll";
+import Link from "next/link";
 
 const navbarelements = ["Home", "Gallery", "Stylist", "Prices", "Contact"];
 
@@ -29,11 +30,21 @@ export default function Navbar({ array }: { array: Elem[] }) {
           }}
         >
           <div className={styles.titlewithlogo}>
-            <Scissors width="60px" height="60px" />
-            BARBER
+            <Link
+              href="/"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+              }}
+            >
+              <Scissors width="60px" height="60px" />
+              BARBER
+            </Link>
           </div>
 
-          <div style={{ width: "50%", display: "flex", color: "white" }}>
+          <div style={{ width: "60%", display: "flex", color: "white" }}>
             {navbarelements.map((x, index) => {
               return (
                 <div
@@ -43,12 +54,22 @@ export default function Navbar({ array }: { array: Elem[] }) {
                     width: `${100 / navbarelements.length + 1}%`,
                   }}
                 >
-                  {x === "Gallery" || x === "Contact" ? (
-                    <a href={x === "Contact" ? "/Contact" : "/gallery"}>{x}</a>
-                  ) : (
-                    <Link to={x} smooth={true} duration={1000}>
+                  {x === "Gallery" || x === "Contact" || x === "Home" ? (
+                    <Link
+                      href={
+                        x === "Contact"
+                          ? "/Contact"
+                          : x === "Gallery"
+                          ? "/gallery"
+                          : "/"
+                      }
+                    >
                       {x}
                     </Link>
+                  ) : (
+                    <ScrollLink to={x} smooth={true} duration={1000}>
+                      {x}
+                    </ScrollLink>
                   )}
                 </div>
               );
@@ -56,10 +77,11 @@ export default function Navbar({ array }: { array: Elem[] }) {
           </div>
           <div
             style={{
-              width: "20%",
+              width: "30%",
 
               display: "flex",
-              justifyContent: "center",
+              flexDirection: "row-reverse",
+
               alignItems: "center",
             }}
           >
@@ -81,10 +103,18 @@ export default function Navbar({ array }: { array: Elem[] }) {
             opacity: "0.9",
           }}
         >
-          <div className={styles.titlewithlogo}>
+          <Link
+            href="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+            }}
+          >
             <Scissors width="60px" height="60px" />
             BARBER
-          </div>
+          </Link>
 
           <div className={styles.menuOpener} onClick={handleMenuToggle}>
             <MenuOpen height="50px" width="50px" />
@@ -118,13 +148,13 @@ export default function Navbar({ array }: { array: Elem[] }) {
                   style={{ height: "40px", opacity: "1" }}
                 >
                   {x === "Gallery" || x === "Contact" ? (
-                    <a href={x === "Contact" ? "/Contact" : "/gallery"}>
-                      {x.toLocaleUpperCase()}
-                    </a>
-                  ) : (
-                    <Link to={x} smooth={true} duration={1000}>
+                    <Link href={x === "Contact" ? "/Contact" : "/gallery"}>
                       {x.toLocaleUpperCase()}
                     </Link>
+                  ) : (
+                    <ScrollLink to={x} smooth={true} duration={1000}>
+                      {x.toLocaleUpperCase()}
+                    </ScrollLink>
                   )}
                 </div>
               );
