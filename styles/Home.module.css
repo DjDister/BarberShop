@@ -27,7 +27,7 @@
   position: relative;
   z-index: 22;
   overflow: hidden;
-  min-height: 300px;
+  min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@
 
 @media screen and (min-width: 768px) {
   .workinghoursCont {
-    min-height: 0px;
+    min-height: 300px;
   }
 }
   

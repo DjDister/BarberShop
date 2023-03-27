@@ -51,6 +51,7 @@ export default function Home({
     client,
     landingdata[0].workinghoursImageBackground
   ) as UseNextSanityImageProps | null;
+
   return (
     <div style={{ width: "100%", height: "100%" }} className={styles.container}>
       <Element name="Home">
@@ -65,14 +66,20 @@ export default function Home({
           </div>
         </div>
         <div className={styles.workinghoursCont}>
-          <Image
-            src={workinghoursImageBackground?.src || ""}
-            alt="My Image"
-            className={styles.workinghoursBackgroundImage}
-            fill
+          <div
             style={{
+              backgroundImage: `url(${workinghoursImageBackground?.src || ""})`,
+              backgroundAttachment: "fixed",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundPosition: "top",
+              backgroundSize: "cover",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              backgroundColor: "red",
               zIndex: 1,
-              objectFit: "cover",
             }}
           />
           <WorkingHours className={styles.wkcont} workinghours={workinghours} />
