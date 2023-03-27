@@ -39,7 +39,7 @@ export default function Home({
     <div style={{ width: "100%", height: "100%" }}>
       <Element name="Home">
         <Navbar array={navbar} />
-        <SecondComponent photos={landingphotos} title={""} />
+        <SecondComponent photos={landingphotos} title={"Best barber"} />
       </Element>
 
       <Element name="Prices">
@@ -57,7 +57,6 @@ export default function Home({
           <div style={{ width: "100%" }}>
             <OurServices ourservices={ourservices} />
           </div>
-          <div style={{ width: "50%" }}></div>
         </div>
       </Element>
       <div>

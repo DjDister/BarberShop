@@ -28,6 +28,20 @@ export default function OurServices({
       >
         OUR SERVICES
       </h1>
+      <div
+        className={styles.line}
+        style={{
+          width: "100%",
+          height: "3px",
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+        <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
+        <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+      </div>
       <div className={styles.servicesCont}>
         {ourservices.map((ourservice, index) => (
           <div key={index}>
@@ -94,15 +108,6 @@ export default function OurServices({
                     </div>
                   </div>
                 ))}
-                <div
-                  style={{
-                    width: "100%",
-                    height: "10px",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    backgroundColor: "grey",
-                  }}
-                />
               </div>
             )}
           </div>
