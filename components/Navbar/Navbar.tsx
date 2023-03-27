@@ -134,10 +134,12 @@ export default function Navbar({ array }: { array: Elem[] }) {
               color: "black",
               display: "flex",
               flexDirection: "column",
-              height: `${navbarelements.length * 40 + 55}px`,
+              height: `${navbarelements.length * 70 + 55}px`,
               width: "60%",
               borderRadius: "10px",
               opacity: "1",
+              paddingBottom: "10px",
+              maxWidth: "400px",
             }}
           >
             {navbarelements.map((x, index) => {
@@ -145,10 +147,18 @@ export default function Navbar({ array }: { array: Elem[] }) {
                 <div
                   key={index}
                   className={styles.navbarelements}
-                  style={{ height: "40px", opacity: "1" }}
+                  style={{ height: "70px", opacity: "1" }}
                 >
-                  {x === "Gallery" || x === "Contact" ? (
-                    <Link href={x === "Contact" ? "/Contact" : "/gallery"}>
+                  {x === "Gallery" || x === "Contact" || x === "Home" ? (
+                    <Link
+                      href={
+                        x === "Contact"
+                          ? "/Contact"
+                          : x === "Gallery"
+                          ? "/gallery"
+                          : "/"
+                      }
+                    >
                       {x.toLocaleUpperCase()}
                     </Link>
                   ) : (
@@ -170,9 +180,13 @@ export default function Navbar({ array }: { array: Elem[] }) {
               <div
                 className={styles.bookameeting}
                 style={{
-                  height: "40px",
+                  height: "50px",
                   fontWeight: "600",
                   fontSize: "1.2rem",
+                  width: "80%",
+                  textAlign: "center",
+                  paddingTop: "5px",
+                  paddingBottom: "5px",
                 }}
               >
                 BOOK A MEETING
