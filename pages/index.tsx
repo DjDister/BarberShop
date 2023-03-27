@@ -9,6 +9,7 @@ import EmployeeCard from "@/components/EmployeeCard/EmployeeCard";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
 import Footer from "@/components/Footer/Footer";
 import Contact from "@/pages/Contact";
+import { Link, Element } from "react-scroll";
 
 import { Elem } from "@/types";
 
@@ -36,18 +37,29 @@ export default function Home({
 }) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <Navbar array={navbar} />
-      <SecondComponent photos={landingphotos} />
+      <Element name="Home">
+        <Navbar array={navbar} />
+        <SecondComponent photos={landingphotos} />
+      </Element>
 
-      <div style={{ width: "100%", backgroundColor: "red" }}>
-        <WorkingHours className={styles.wkcont} workinghours={workinghours} />
-      </div>
-      <div style={{ width: "100%" }}>
-        <div style={{ width: "100%" }}>
-          <OurServices ourservices={ourservices} />
+      <Element name="Prices">
+        <div
+          style={{
+            width: "100%",
+            backgroundColor: "white",
+            marginTop: "30px",
+            marginBottom: "30px",
+          }}
+        >
+          <WorkingHours className={styles.wkcont} workinghours={workinghours} />
         </div>
-        <div style={{ width: "50%" }}></div>
-      </div>
+        <div style={{ width: "100%" }}>
+          <div style={{ width: "100%" }}>
+            <OurServices ourservices={ourservices} />
+          </div>
+          <div style={{ width: "50%" }}></div>
+        </div>
+      </Element>
       <div>
         <div
           style={{
@@ -82,35 +94,40 @@ export default function Home({
             </div>
           ))}
       </div>
-      <div>
-        <div style={{ textAlign: "center", color: "gray", fontSize: "1.8rem" }}>
-          MEET OUR TEAM OF BEARD PROFESSIONALS
+      <Element name="Stylist">
+        <div>
+          <div
+            style={{ textAlign: "center", color: "gray", fontSize: "1.8rem" }}
+          >
+            MEET OUR TEAM OF BEARD PROFESSIONALS
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "2.3rem",
+              fontWeight: "bold",
+              marginBottom: "10px",
+            }}
+          >
+            OUR BARBERS AND STYLISTS
+          </div>
+          <div
+            className={styles.line}
+            style={{
+              width: "100%",
+              height: "3px",
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "20px",
+            }}
+          >
+            <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+            <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
+            <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+          </div>
         </div>
-        <div
-          style={{
-            textAlign: "center",
-            fontSize: "2.3rem",
-            fontWeight: "bold",
-            marginBottom: "10px",
-          }}
-        >
-          OUR BARBERS AND STYLISTS
-        </div>
-        <div
-          className={styles.line}
-          style={{
-            width: "100%",
-            height: "3px",
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "20px",
-          }}
-        >
-          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
-          <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
-          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
-        </div>
-      </div>
+      </Element>
+
       <div
         style={{
           gap: "10px",
