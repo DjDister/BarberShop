@@ -10,6 +10,8 @@ import SecondComponent from "@/components/SecondComponents/SecondComponent";
 import Footer from "@/components/Footer/Footer";
 import Contact from "@/pages/Contact";
 import { Link, Element } from "react-scroll";
+import backgroundImage from "../components/images/hoursbackground.jpg";
+import Image from "next/image";
 
 import { Elem } from "@/types";
 
@@ -36,67 +38,51 @@ export default function Home({
   landingphotos: any[];
 }) {
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div style={{ width: "100%", height: "100%" }} className={styles.container}>
       <Element name="Home">
         <Navbar array={navbar} />
         <SecondComponent photos={landingphotos} title={"Best barber"} />
       </Element>
 
       <Element name="Prices">
-        <div
-          style={{
-            width: "100%",
-            backgroundColor: "white",
-            marginTop: "30px",
-            marginBottom: "30px",
-          }}
-        >
-          <WorkingHours className={styles.wkcont} workinghours={workinghours} />
-        </div>
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%", marginTop: "30px", marginBottom: "30px" }}>
           <div style={{ width: "100%" }}>
             <OurServices ourservices={ourservices} />
           </div>
         </div>
+        <div style={{ position: "relative" }}>
+          <Image
+            src={backgroundImage}
+            alt="My Image"
+            height={300}
+            width={1800}
+            style={{ position: "relative" }}
+          />
+          <div
+            style={{
+              width: "100%",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <WorkingHours
+              className={styles.wkcont}
+              workinghours={workinghours}
+            />
+          </div>
+        </div>
       </Element>
-      <div>
-        <div
-          style={{
-            textAlign: "center",
-            fontSize: "2.3rem",
-            fontWeight: "bold",
-            marginBottom: "10px",
-          }}
-        >
-          OUR REVIEWS
-        </div>
-        <div
-          className={styles.line}
-          style={{
-            width: "100%",
-            height: "3px",
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "20px",
-          }}
-        >
-          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
-          <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
-          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
-        </div>
-      </div>
-      <div className={styles.reviewdiv} style={{ width: "100%" }}>
-        {reviews &&
-          reviews.slice(0, 4).map((review, index) => (
-            <div key={index} className={styles.rewiev}>
-              <ReviewCard review={review} />
-            </div>
-          ))}
-      </div>
       <Element name="Stylist">
         <div>
           <div
-            style={{ textAlign: "center", color: "gray", fontSize: "1.8rem" }}
+            style={{
+              textAlign: "center",
+              color: "gray",
+              fontSize: "1.8rem",
+              marginTop: "30px",
+            }}
           >
             MEET OUR TEAM OF BEARD PROFESSIONALS
           </div>
@@ -143,10 +129,45 @@ export default function Home({
 
       {/* <div style={{ width: "100%" }}>
         <div style={{ width: "100%" }}>
-          <OurServices ourservices={ourservices} />
+        <OurServices ourservices={ourservices} />
         </div>
         <div style={{ width: "50%" }}></div>
       </div> */}
+      <div>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "2.3rem",
+            fontWeight: "bold",
+            marginBottom: "10px",
+            marginTop: "20px",
+          }}
+        >
+          OUR REVIEWS
+        </div>
+        <div
+          className={styles.line}
+          style={{
+            width: "100%",
+            height: "3px",
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+          <div style={{ width: "10%", backgroundColor: "#396e3d" }}></div>
+          <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
+        </div>
+      </div>
+      <div className={styles.reviewdiv} style={{ width: "100%" }}>
+        {reviews &&
+          reviews.slice(0, 4).map((review, index) => (
+            <div key={index} className={styles.rewiev}>
+              <ReviewCard review={review} />
+            </div>
+          ))}
+      </div>
       <Footer
         workinghours={workinghours}
         footer={{

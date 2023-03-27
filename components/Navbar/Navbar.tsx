@@ -32,6 +32,7 @@ export default function Navbar({ array }: { array: Elem[] }) {
             <Scissors width="60px" height="60px" />
             BARBER
           </div>
+
           <div style={{ width: "50%", display: "flex", color: "white" }}>
             {navbarelements.map((x, index) => {
               return (
