@@ -28,7 +28,9 @@ export default function ReviewCard({ review }: { review: Review }) {
         height={150}
       />
       <div>
-        <div>{review.review}</div>
+        <div className={styles.reviewDesc}>
+          <p>{review.review}</p>
+        </div>
         <div className={styles.reviewerName}>{review.name}</div>
       </div>
     </div>

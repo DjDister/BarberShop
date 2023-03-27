@@ -54,6 +54,7 @@ export type LandingData = {
   reviewsTitle: string;
   ourTeamTitle: string;
   ourTeamTitle2: string;
+  workinghoursImageBackground: any;
 };
 
 export type ConctactData = {

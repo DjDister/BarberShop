@@ -3,17 +3,23 @@ import { createClient } from "next-sanity";
 import WorkingHours from "@/components/WorkingHours/WorkingHours";
 import Navbar from "@/components/Navbar/Navbar";
 import OurServices from "@/components/OurServices/OurServices";
-import { Employee, OurService, Review, WorkingHour } from "@/types";
+import {
+  Employee,
+  FooterType,
+  LandingData,
+  OurService,
+  Review,
+  WorkingHour,
+} from "@/types";
 import ReviewCard from "@/components/ReviewCard/ReviewCard";
 import EmployeeCard from "@/components/EmployeeCard/EmployeeCard";
 import SecondComponent from "@/components/SecondComponents/SecondComponent";
 import Footer from "@/components/Footer/Footer";
-import Contact from "@/pages/Contact";
-import { Link, Element } from "react-scroll";
-import backgroundImage from "../components/images/hoursbackground.jpg";
+import { Element } from "react-scroll";
 import Image from "next/image";
 
 import { Elem } from "@/types";
+import { useNextSanityImage, UseNextSanityImageProps } from "next-sanity-image";
 
 const client = createClient({
   projectId: "0kjvrvfn",
@@ -29,6 +35,8 @@ export default function Home({
   employees,
   navbar,
   landingphotos,
+  landingdata,
+  footer,
 }: {
   workinghours: WorkingHour[];
   ourservices: OurService[];
@@ -36,42 +44,38 @@ export default function Home({
   employees: Employee[];
   navbar: Elem[];
   landingphotos: any[];
+  landingdata: LandingData[];
+  footer: FooterType[];
 }) {
+  const workinghoursImageBackground = useNextSanityImage(
+    client,
+    landingdata[0].workinghoursImageBackground
+  ) as UseNextSanityImageProps | null;
   return (
     <div style={{ width: "100%", height: "100%" }} className={styles.container}>
       <Element name="Home">
         <Navbar array={navbar} />
-        <SecondComponent photos={landingphotos} title={"Best barber"} />
+        <SecondComponent photos={landingphotos} title={landingdata[0].title} />
       </Element>
 
       <Element name="Prices">
-        <div style={{ width: "100%", marginTop: "30px", marginBottom: "30px" }}>
+        <div style={{ width: "100%", marginTop: "40px", marginBottom: "30px" }}>
           <div style={{ width: "100%" }}>
             <OurServices ourservices={ourservices} />
           </div>
         </div>
-        <div style={{ position: "relative" }}>
+        <div className={styles.workinghoursCont}>
           <Image
-            src={backgroundImage}
+            src={workinghoursImageBackground?.src || ""}
             alt="My Image"
-            height={300}
-            width={1800}
-            style={{ position: "relative" }}
-          />
-          <div
+            className={styles.workinghoursBackgroundImage}
+            fill
             style={{
-              width: "100%",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
+              zIndex: 1,
+              objectFit: "cover",
             }}
-          >
-            <WorkingHours
-              className={styles.wkcont}
-              workinghours={workinghours}
-            />
-          </div>
+          />
+          <WorkingHours className={styles.wkcont} workinghours={workinghours} />
         </div>
       </Element>
       <Element name="Stylist">
@@ -81,10 +85,10 @@ export default function Home({
               textAlign: "center",
               color: "gray",
               fontSize: "1.8rem",
-              marginTop: "30px",
+              marginTop: "40px",
             }}
           >
-            MEET OUR TEAM OF BEARD PROFESSIONALS
+            {landingdata[0].ourTeamTitle}
           </div>
           <div
             style={{
@@ -94,7 +98,7 @@ export default function Home({
               marginBottom: "10px",
             }}
           >
-            OUR BARBERS AND STYLISTS
+            {landingdata[0].ourTeamTitle2}
           </div>
           <div
             className={styles.line}
@@ -119,6 +123,7 @@ export default function Home({
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap",
+          marginTop: 40,
         }}
       >
         {employees &&
@@ -127,12 +132,6 @@ export default function Home({
           ))}
       </div>
 
-      {/* <div style={{ width: "100%" }}>
-        <div style={{ width: "100%" }}>
-        <OurServices ourservices={ourservices} />
-        </div>
-        <div style={{ width: "50%" }}></div>
-      </div> */}
       <div>
         <div
           style={{
@@ -140,10 +139,10 @@ export default function Home({
             fontSize: "2.3rem",
             fontWeight: "bold",
             marginBottom: "10px",
-            marginTop: "20px",
+            marginTop: "40px",
           }}
         >
-          OUR REVIEWS
+          {landingdata[0].reviewsTitle}
         </div>
         <div
           className={styles.line}
@@ -160,7 +159,10 @@ export default function Home({
           <div style={{ width: "30%", backgroundColor: "#faedcd" }}></div>
         </div>
       </div>
-      <div className={styles.reviewdiv} style={{ width: "100%" }}>
+      <div
+        className={styles.reviewdiv}
+        style={{ width: "100%", marginTop: 40 }}
+      >
         {reviews &&
           reviews.slice(0, 4).map((review, index) => (
             <div key={index} className={styles.rewiev}>
@@ -168,31 +170,31 @@ export default function Home({
             </div>
           ))}
       </div>
-      <Footer
-        workinghours={workinghours}
-        footer={{
-          title: "",
-          description: "",
-          logo: undefined,
-          phone: "",
-          email: "",
-          address: "",
-        }}
-      />
+      <Footer workinghours={workinghours} footer={footer[0]} />
     </div>
   );
 }
 
 export async function getStaticProps() {
-  const [workinghours, ourservices, reviews, employees, navbar, landingphotos] =
-    await Promise.all([
-      client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
-      client.fetch<OurService>(`*[_type == "ourservices"]`),
-      client.fetch<Review[]>(`*[_type == "reviews"]`),
-      client.fetch<Employee[]>(`*[_type == "employees"]`),
-      client.fetch<Elem>(`*[_type == "navbar"]`),
-      client.fetch<Elem>(`*[_type == "landingphoto"]`),
-    ]);
+  const [
+    workinghours,
+    ourservices,
+    reviews,
+    employees,
+    navbar,
+    landingphotos,
+    landingdata,
+    footer,
+  ] = await Promise.all([
+    client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
+    client.fetch<OurService>(`*[_type == "ourservices"]`),
+    client.fetch<Review[]>(`*[_type == "reviews"]`),
+    client.fetch<Employee[]>(`*[_type == "employees"]`),
+    client.fetch<Elem>(`*[_type == "navbar"]`),
+    client.fetch<Elem>(`*[_type == "landingphoto"]`),
+    client.fetch<LandingData>(`*[_type == "landingdata"]`),
+    client.fetch<FooterType>(`*[_type == "footer"]`),
+  ]);
   return {
     props: {
       workinghours,
@@ -201,6 +203,8 @@ export async function getStaticProps() {
       employees,
       navbar,
       landingphotos,
+      landingdata,
+      footer,
     },
   };
 }
