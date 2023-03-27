@@ -25,10 +25,11 @@
   color: white;
 }
 .bookameeting {
-  width: 80%;
+  width: 60%;
   height: 80%;
   background-color: #396e3d;
   display: flex;
+
   align-items: center;
   justify-content: center;
 }
@@ -84,5 +85,8 @@
   .mobileNav:hover .navMenu {
     transition: 1s;
     right: 0;
+  }
+  .titlewithlogo {
+    width: 40%;
   }
 }
