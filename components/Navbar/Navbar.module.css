@@ -67,7 +67,7 @@
     align-items: center;
 
     position: relative;
-    z-index: 90000;
+    z-index: 900000;
   }
   .container {
     display: none;

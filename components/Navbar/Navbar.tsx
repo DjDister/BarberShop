@@ -104,7 +104,7 @@ export default function Navbar({ array }: { array: Elem[] }) {
               color: "black",
               display: "flex",
               flexDirection: "column",
-              height: `${navbarelements.length * 35 + 55}px`,
+              height: `${navbarelements.length * 40 + 55}px`,
               width: "60%",
               borderRadius: "10px",
               opacity: "1",
@@ -115,19 +115,17 @@ export default function Navbar({ array }: { array: Elem[] }) {
                 <div
                   key={index}
                   className={styles.navbarelements}
-                  style={{ height: "35px", opacity: "1" }}
+                  style={{ height: "40px", opacity: "1" }}
                 >
-                  <a
-                    href={
-                      x === "Contact"
-                        ? "/Contact"
-                        : x === "Gallery"
-                        ? "/gallery"
-                        : "/"
-                    }
-                  >
-                    {x.toLocaleUpperCase()}
-                  </a>
+                  {x === "Gallery" || x === "Contact" ? (
+                    <a href={x === "Contact" ? "/Contact" : "/gallery"}>
+                      {x.toLocaleUpperCase()}
+                    </a>
+                  ) : (
+                    <Link to={x} smooth={true} duration={1000}>
+                      {x.toLocaleUpperCase()}
+                    </Link>
+                  )}
                 </div>
               );
             })}
