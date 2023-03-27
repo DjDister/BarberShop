@@ -5,7 +5,9 @@ import Scissors from "../Icons/Scissors";
 import Phone2 from "../Icons/Phone2";
 import Email2 from "../Icons/Email2";
 import Home from "../Icons/Home";
-import { Employee, OurService, Review, WorkingHour } from "@/types";
+import Image from "next/image";
+import { WorkingHour, FooterType } from "@/types";
+import { useNextSanityImage, UseNextSanityImageProps } from "next-sanity-image";
 const client = createClient({
   projectId: "0kjvrvfn",
   dataset: "production",
@@ -15,34 +17,49 @@ const client = createClient({
 
 export default function Footer({
   workinghours,
+  footer,
 }: {
   workinghours: WorkingHour[];
+  footer: FooterType;
 }) {
+  const imageProps = useNextSanityImage(
+    client,
+    footer.logo
+  ) as UseNextSanityImageProps | null;
   return (
     <div className={styles.whitesettup}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <Scissors width="150px" height="150px" />
-          BARBER
+          {imageProps ? (
+            <Image
+              src={imageProps ? imageProps.src : ""}
+              className={styles.logoImage}
+              alt="logo"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          ) : (
+            <>
+              <Scissors width="150px" height="150px" />
+              BARBER
+            </>
+          )}
         </div>
         <div className={styles.aboutus}>
           <div className={styles.title}> ABOUT US</div>
-          <div>
-            This salon has been satisfying customers for 20 years, come and see
-            for yourself !
-          </div>
+          <div>{footer.description}</div>
           <div className={styles.icons}>
             <div className={styles.icon}>
               <Phone2 fill="#396e3d" />
-              +48 123 456 789
+              {footer.phone}
             </div>
             <div className={styles.icon}>
-              <Email2 fill="#396e3d" /> barbarshop@gmail.com
+              <Email2 fill="#396e3d" /> {footer.email}
             </div>
             <div className={styles.icon}>
               {" "}
               <Home fill="#396e3d" />
-              ul Akademicka 5 Warszawa
+              {footer.address}
             </div>
           </div>
         </div>
@@ -60,14 +77,4 @@ export default function Footer({
       </div>
     </div>
   );
-}
-export async function getStaticProps() {
-  const [workinghours] = await Promise.all([
-    client.fetch<WorkingHour>(`*[_type == "workinghour"]`),
-  ]);
-  return {
-    props: {
-      workinghours,
-    },
-  };
 }

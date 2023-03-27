@@ -39,3 +39,32 @@ export type Employee = {
 export type GalleryPhotoType = {
   image: any;
 };
+
+export type FooterType = {
+  title: string;
+  description: string;
+  logo: any;
+  phone: string;
+  email: string;
+  address: string;
+};
+
+export type LandingData = {
+  title: string;
+  reviewsTitle: string;
+  ourTeamTitle: string;
+  ourTeamTitle2: string;
+};
+
+export type ConctactData = {
+  title: string;
+  formTitle: string;
+  mapTitle: string;
+  informationTitle: string;
+  informationDescription: string;
+  description: string;
+  address: string;
+  phone: string;
+  phone2: string;
+  email: string;
+};

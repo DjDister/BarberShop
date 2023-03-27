@@ -39,7 +39,7 @@ export default function Home({
     <div style={{ width: "100%", height: "100%" }}>
       <Element name="Home">
         <Navbar array={navbar} />
-        <SecondComponent photos={landingphotos} />
+        <SecondComponent photos={landingphotos} title={""} />
       </Element>
 
       <Element name="Prices">
@@ -148,7 +148,17 @@ export default function Home({
         </div>
         <div style={{ width: "50%" }}></div>
       </div> */}
-      <Footer workinghours={workinghours} />
+      <Footer
+        workinghours={workinghours}
+        footer={{
+          title: "",
+          description: "",
+          logo: undefined,
+          phone: "",
+          email: "",
+          address: "",
+        }}
+      />
     </div>
   );
 }
