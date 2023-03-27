@@ -5,12 +5,40 @@
 
 .wkcont {
   gap: 10px;
+  z-index: 24;
+  position: relative;
+  padding: 15px;
 }
 .reviewdiv {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap:10px;
+  
 }
+
 .rewiev {
   width: 48%;
-  margin-left: 1%;
+  max-height: 340px;
+  margin-top: 4px;
 }
+
+.workinghoursCont{
+  position: relative;
+  z-index: 22;
+  overflow: hidden;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .workinghoursCont {
+    min-height: 0px;
+  }
+}
+  
+
+
+
